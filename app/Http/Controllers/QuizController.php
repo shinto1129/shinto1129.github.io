@@ -98,6 +98,7 @@ class QuizController extends Controller
         $user = \Auth::user(); //1.ログインユーザーの取得
         $question_id = $request->question_id; //2.投稿idの取得
         $already_good = Good::where('user_id', $user['id'])->where('question_id', $question_id)->first();
+        //dd($already_good);
         if (!$already_good) { //もしこのユーザーがこの投稿にまだいいねしてなかったら
             $good = Good::insertGetId([
                 'user_id' => $user['id'],

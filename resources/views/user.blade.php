@@ -19,7 +19,7 @@
                         <p>結果: @if($ans->result == 1)正解@else不正解@endif</p>
                         <div class="good-content">
                             <p>面白い問題だったらクリック</p>
-                            <i class="fa-solid fa-thumbs-up fa-2x good" data-good-id="{{ $ans->q_id }}"></i>
+                            <i class="fa-solid fa-thumbs-up fa-2x good" data-good-id="{{ $ans->question_id }}"></i>
                         </div>
                     </div>
                 </div>

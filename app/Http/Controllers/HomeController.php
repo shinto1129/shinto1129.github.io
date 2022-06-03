@@ -75,13 +75,14 @@ class HomeController extends Controller
         ->join('questions', 'answers.question_id', '=', 'questions.id')
         ->join('users', 'questions.user_id', '=', 'users.id')
         ->where('answers.user_id', $user['id'])
-        ->select('answers.*', 'questions.title as title', 'questions.text as text', 'questions.user_id as q_id', 'users.name as uname', 'users.id as u_id')
+        ->select('answers.*', 'questions.title as title', 'questions.text as text', 'users.name as uname', 'users.id as u_id')
         ->get();
 
         $good = Good::get();
         //dd($answer);
         $category = Category::get();
         //dd($data);
+
         return view('user', compact('data', 'user', 'answer', 'good'));
     }
 
