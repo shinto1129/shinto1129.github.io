@@ -7,6 +7,12 @@
     </div>
     <div class="wrapper">
     <div class="user-container fadein left">
+        <div class="good-container">
+            <h2>いいねされた数</h2><br>
+            <div class="good-item">
+                <i class="fa-solid fa-thumbs-up fa-2x"></i><span class="like-data">x{{ $good_count->good_count }}</span>
+            </div>
+        </div>
         <div class="user-content">
             <h2 class="fadein top">解答一覧</h2>
             @foreach($answer as $ans)
@@ -19,7 +25,7 @@
                         <p>結果: @if($ans->result == 1)正解@else不正解@endif</p>
                         <div class="good-content">
                             <p>面白い問題だったらクリック</p>
-                            <i class="fa-solid fa-thumbs-up fa-2x good" data-good-id="{{ $ans->question_id }}"></i>
+                            <i class="fa-solid fa-thumbs-up fa-2x good @foreach($good as $g) @if($g['question_id'] == $ans->question_id) like @endif @endforeach" data-good-id="{{ $ans->question_id }}"></i>
                         </div>
                     </div>
                 </div>
@@ -54,42 +60,6 @@
             </div>
             @endif
         @endforeach
-        <div class="content-item fadein">
-            <img src="./image/onepiece11_arlong.png" alt="">
-            <div class="item-menu">
-                <ul class="list">
-                    <li>Quizタイトル</li>
-                    <li>カテゴリ</li>
-                    <li>作者名</li>
-                </ul>
-                <p>見出し</p>
-                <a href="#">編集する</a>
-            </div>
-        </div>
-        <div class="content-item fadein">
-            <img src="./image/onepiece16_moria.png" alt="">
-            <div class="item-menu">
-                <ul class="list">
-                    <li>Quizタイトル</li>
-                    <li>カテゴリ</li>
-                    <li>作者名</li>
-                </ul>
-                <p>見出し</p>
-                <a href="#">編集する</a>
-            </div>
-        </div>
-        <div class="content-item fadein">
-            <img src="./image/onepiece17_doflamingo.png" alt="">
-            <div class="item-menu">
-                <ul class="list">
-                    <li>Quizタイトル</li>
-                    <li>カテゴリ</li>
-                    <li>作者名</li>
-                </ul>
-                <p>見出し</p>
-                <a href="#">編集する</a>
-            </div>
-        </div>
     </div>
 </div>
 @endsection

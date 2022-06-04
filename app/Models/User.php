@@ -21,7 +21,16 @@ class User extends Authenticatable
 
     public function good()
     {
-        return $this->hasMany('App\Models\Good');
+        return $this->hasMany(Good::class);
+    }
+
+    public function answer()
+    {
+        return $this->hasMany(Answer::class)->where('result', 1);
+    }
+    public function question()
+    {
+        return $this->hasMany(Question::class);
     }
     /**
      * The attributes that are mass assignable.

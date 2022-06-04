@@ -1,4 +1,4 @@
-@extends('layouts.set')
+@extends('layouts.setsub')
 
 @section('content')
 <div class="title-container">
@@ -39,7 +39,7 @@
                             <li>{{ $dat->uname }}</li>
                         </ul>
                         <p>{{ $dat->text }}</p>
-                        <a href="/answer/{{ $dat->id }}">Quizに挑戦</a>
+                        <a href="/answer/{{ $dat->id }}" class="@foreach($answer as $ans) @if($ans->user_id == $user['id'] && $dat->id == $ans->question_id) like @break @endif @endforeach">Quizに挑戦@foreach($answer as $ans) @if($ans->user_id == $user['id'] && $dat->id == $ans->question_id) ※解答済み @break @endif @endforeach</a>
                     </div>
                 </div>
                 @endif

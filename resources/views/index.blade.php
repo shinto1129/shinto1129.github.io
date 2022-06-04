@@ -11,8 +11,8 @@
             <div class="rank-container fadein">
                 <h2>正解数ランキング</h2>
                 <div class="category-list">
-                    @foreach($urank as $u)
-                    <p>{{ $u->name }}</p>
+                    @foreach($arank as $a)
+                    <p>{{ $a->name }}</p>
                     @endforeach
                 </div>
             </div>
@@ -38,7 +38,7 @@
                             <li>{{ $dat->uname }}</li>
                         </ul>
                         <p>{{ $dat->text }}</p>
-                        <a href="/answer/{{ $dat->id }}">Quizに挑戦</a>
+                        <a href="/answer/{{ $dat->id }}" class="@foreach($answer as $ans) @if($ans->user_id == $user['id'] && $dat->id == $ans->question_id) like @break @endif @endforeach">Quizに挑戦@foreach($answer as $ans) @if($ans->user_id == $user['id'] && $dat->id == $ans->question_id) ※解答済み @break @endif @endforeach</a>
                     </div>
                 </div>
                 @endif

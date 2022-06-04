@@ -24,6 +24,7 @@ class HomeController extends Controller
         ->orderBy('id', 'DESC')
         ->get();
         //dd($data);
+        $answer = Answer::get();
         
         $rank = DB::table('questions')
         ->join('categories', 'questions.category_id', '=', 'categories.id')
@@ -33,13 +34,16 @@ class HomeController extends Controller
         ->get();
         //dd($rank);
         
-        $qrank = Question::select('id', 'title')->limit(3)->get();
+        $qrank = Question::withCount('answer')->orderby('answer_count', 'desc')->limit(3)->get();
+        // dd($qrank);
 
-        $urank = User::select('name')->limit(3)->get();
+        $arank = User::withCount('answer')->orderBy('answer_count', 'desc')->limit(3)->get();
+        // dd($arank);
 
+        $urank = User::withCount('good')->orderBy('good_count', 'desc')->limit(3)->get();
+        // dd($urank);
 
-
-        return view('index', compact('data', 'rank', 'qrank', 'urank', 'user'));
+        return view('index', compact('data', 'rank', 'qrank', 'urank', 'user','arank', 'answer'));
     }
 
     public function quiz()
@@ -48,15 +52,16 @@ class HomeController extends Controller
         if(empty($user)){
             return view('auth.login');
         }
+        $answer = Answer::get();
         $data = DB::table('questions')
         ->join('categories', 'questions.category_id', '=', 'categories.id')
         ->join('users', 'questions.user_id', '=', 'users.id')
         ->select('questions.*', 'users.name as uname', 'categories.name as cname','categories.image as image')
         ->get();
 
-        $category = Category::get();
+        $category = Category::limit(10)->get();
         //dd($data);
-        return view('quiz', compact('data', 'category', 'user'));
+        return view('quiz', compact('data', 'category', 'user', 'answer'));
     }
 
     public function user()
@@ -78,12 +83,17 @@ class HomeController extends Controller
         ->select('answers.*', 'questions.title as title', 'questions.text as text', 'users.name as uname', 'users.id as u_id')
         ->get();
 
-        $good = Good::get();
+        $good = Good::where('user_id', $user['id'])->get();
+        $good_count = User::withCount('good')->where('id', $user['id'])->first();
+        //dd($good_count['good_count']);
         //dd($answer);
         $category = Category::get();
         //dd($data);
 
-        return view('user', compact('data', 'user', 'answer', 'good'));
+        
+        //dd($good);
+
+        return view('user', compact('data', 'user', 'answer', 'good', 'good_count'));
     }
 
     public function answer($id)

@@ -54,6 +54,7 @@ class QuizController extends Controller
         $user = \Auth::user();
         $flg = $request->all();
         $quiz = Question::where('id', $flg['question_id'])->first();
+        $quiz_id = $quiz['id'];
 
         if($flg['answer'] == $quiz['answer']){
             $result = 1;
@@ -69,7 +70,8 @@ class QuizController extends Controller
              'created_at' => now(),
             'updated_at' => now(),
         ]);
-        return view('qresult', compact('result'));
+
+        return view('qresult', compact('result','quiz_id'));
     }
 
     public function edit(Request $request, $id)
