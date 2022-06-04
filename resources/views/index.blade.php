@@ -43,42 +43,6 @@
                 </div>
                 @endif
             @endforeach
-            <div class="content-item fadein">
-                <img src="./image/onepiece11_arlong.png" alt="">
-                <div class="item-menu">
-                    <ul class="list">
-                        <li>Quizタイトル</li>
-                        <li>カテゴリ</li>
-                        <li>作者名</li>
-                    </ul>
-                    <p>見出し</p>
-                    <a href="#">Quizに挑戦</a>
-                </div>
-            </div>
-            <div class="content-item fadein">
-                <img src="./image/onepiece16_moria.png" alt="">
-                <div class="item-menu">
-                    <ul class="list">
-                        <li>Quizタイトル</li>
-                        <li>カテゴリ</li>
-                        <li>作者名</li>
-                    </ul>
-                    <p>見出し</p>
-                    <a href="#">Quizに挑戦</a>
-                </div>
-            </div>
-            <div class="content-item fadein">
-                <img src="./image/onepiece17_doflamingo.png" alt="">
-                <div class="item-menu">
-                    <ul class="list">
-                        <li>Quizタイトル</li>
-                        <li>カテゴリ</li>
-                        <li>作者名</li>
-                    </ul>
-                    <p>見出し</p>
-                    <a href="#">Quizに挑戦</a>
-                </div>
-            </div>
         </div>
         <div class="right-container fadein right">
             <div class="rank-container fadein">

@@ -26,12 +26,7 @@ class HomeController extends Controller
         //dd($data);
         $answer = Answer::get();
         
-        $rank = DB::table('questions')
-        ->join('categories', 'questions.category_id', '=', 'categories.id')
-        ->groupBy('questions.category_id')
-        ->select(\DB::raw('categories.name as name', 'count(*) as COUNT'))
-        ->limit(3)
-        ->get();
+        $rank = Category::withCount('question')->orderby('question_count', 'desc')->limit(3)->get();
         //dd($rank);
         
         $qrank = Question::withCount('answer')->orderby('answer_count', 'desc')->limit(3)->get();

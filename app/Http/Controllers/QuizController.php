@@ -99,6 +99,7 @@ class QuizController extends Controller
     {
         $user = \Auth::user(); //1.ログインユーザーの取得
         $question_id = $request->question_id; //2.投稿idの取得
+        $quiz = Question::where('id', $question_id)->first();
         $already_good = Good::where('user_id', $user['id'])->where('question_id', $question_id)->first();
         //dd($already_good);
         if (!$already_good) { //もしこのユーザーがこの投稿にまだいいねしてなかったら
@@ -107,6 +108,7 @@ class QuizController extends Controller
                 'question_id' => $question_id,
                 'created_at' => now(),
                 'updated_at' => now(),
+                'user_create_id' => $quiz['user_id'],
             ]);
         } else { //もしこのユーザーがこの投稿に既にいいねしてたらdelete
             $good = Good::where('question_id', $question_id)->where('user_id', $user['id'])->delete();

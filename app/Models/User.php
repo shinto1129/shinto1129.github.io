@@ -21,7 +21,7 @@ class User extends Authenticatable
 
     public function good()
     {
-        return $this->hasMany(Good::class);
+        return $this->hasMany(Good::class, 'user_create_id');
     }
 
     public function answer()
