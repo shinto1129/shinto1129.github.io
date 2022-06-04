@@ -41,6 +41,33 @@ class HomeController extends Controller
         return view('index', compact('data', 'rank', 'qrank', 'urank', 'user','arank', 'answer'));
     }
 
+    public function guestIndex()
+    {
+        $user = User::where('id', 0)->first();
+        $data = DB::table('questions')
+        ->join('categories', 'questions.category_id', '=', 'categories.id')
+        ->join('users', 'questions.user_id', '=', 'users.id')
+        ->select('questions.*', 'users.name as uname', 'categories.name as cname','categories.image as image')
+        ->orderBy('id', 'DESC')
+        ->get();
+        //dd($data);
+        $answer = Answer::get();
+        
+        $rank = Category::withCount('question')->orderby('question_count', 'desc')->limit(3)->get();
+        //dd($rank);
+        
+        $qrank = Question::withCount('answer')->orderby('answer_count', 'desc')->limit(3)->get();
+        // dd($qrank);
+
+        $arank = User::withCount('answer')->orderBy('answer_count', 'desc')->limit(3)->get();
+        // dd($arank);
+
+        $urank = User::withCount('good')->orderBy('good_count', 'desc')->limit(3)->get();
+        // dd($urank);
+
+        return view('index', compact('data', 'rank', 'qrank', 'urank', 'user', 'arank', 'answer'));
+    }
+
     public function quiz()
     {
         $user = \Auth::user();
@@ -59,6 +86,7 @@ class HomeController extends Controller
         return view('quiz', compact('data', 'category', 'user', 'answer'));
     }
 
+
     public function user()
     {
         $user = \Auth::user();
@@ -69,6 +97,7 @@ class HomeController extends Controller
         ->join('categories', 'questions.category_id', '=', 'categories.id')
         ->join('users', 'questions.user_id', '=', 'users.id')
         ->select('questions.*', 'users.name as uname', 'categories.name as cname','categories.image as image')
+        ->orderBy('id', 'DESC')
         ->get();
 
         $answer = DB::table('answers')

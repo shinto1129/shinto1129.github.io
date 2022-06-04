@@ -1,4 +1,4 @@
-@extends('layouts.sub')
+@extends('layouts.main')
 
 @section('content')
 <form method="post" action="{{ route('login') }}">
@@ -17,6 +17,9 @@
             <a href="{{ route('register') }}">新規登録はこちら</a>
         </div>
         <div class="form-register fadein right">
+            <a href="/guest">ゲストで参加</a>
+        </div>
+        <div class="form-register fadein">
             <a href="{{ route('password.request') }}">パスワードをお忘れの方</a>
         </div>
     </div>

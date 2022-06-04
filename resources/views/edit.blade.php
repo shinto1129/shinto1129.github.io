@@ -35,7 +35,7 @@
             <option value="{{ $cat['id'] }}" @if($data['category_id'] == $cat['id']) selected @endif>{{ $cat['name'] }}</option>
             @endforeach
         </select><br>
-        <input type="submit" value="作成する">
+        <input type="submit" value="編集する">
     </div>
 </form>
 @section('content')

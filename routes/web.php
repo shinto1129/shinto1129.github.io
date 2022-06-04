@@ -37,6 +37,7 @@ Route::get('/user', [HomeController::class, 'user']);
 Route::get('/edit/{id}', [HomeController::class, 'edit']);
 Route::post('/edit/{id}', [QuizController::class, 'edit']);
 Route::get('/delete/{id}', [QuizController::class, 'delete']);
+Route::get('/guest', [HomeController::class, 'guestIndex'])->name('guest');
 
 Route::post('/good', [QuizController::class, 'good'])->name('good');
 

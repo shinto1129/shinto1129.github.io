@@ -1,4 +1,4 @@
-@extends('layouts.set')
+@extends('layouts.setsub')
 
 @section('content')
 <div class="title-container">
@@ -42,24 +42,47 @@
         </div>
     </div>
     <div class="container fadein">
-        <h2 class="fadein top">作成Quiz一覧</h2>
-        @foreach($data as $dat)
-            @if($dat->user_id == $user['id'])
-            <div class="content-item fadein">
-                <img src="./image/{{ $dat->image }}" alt="">
-                <div class="item-menu">
-                    <ul class="list">
-                        <li>{{ $dat->title }}</li>
-                        <li>{{ $dat->cname }}</li>
-                        <li>{{ $dat->uname }}</li>
-                    </ul>
-                    <p>{{ $dat->text }}</p>
-                    <a href="/edit/{{ $dat->id }}">編集する</a>
-                    <a href="/delete/{{ $dat->id }}" class="delete">削除する</a>
+        @if($user['id'] == 1)
+            <h2 class="fadein top">全クイズ一覧</h2>
+            @foreach($data as $dat)
+                <div class="content-item fadein">
+                    <img src="./image/{{ $dat->image }}" alt="">
+                    <div class="item-menu">
+                        <ul class="list">
+                            <li>{{ $dat->title }}</li>
+                            <li>{{ $dat->cname }}</li>
+                            <li>{{ $dat->uname }}</li>
+                        </ul>
+                        <p>{{ $dat->text }}</p>
+                        <div class="edit-btn">
+                            <a href="/edit/{{ $dat->id }}">編集する</a>
+                            <a href="/delete/{{ $dat->id }}" class="delete">削除する</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            @endif
-        @endforeach
+            @endforeach
+        @else
+            <h2 class="fadein top">作成Quiz一覧</h2>
+            @foreach($data as $dat)
+                @if($dat->user_id == $user['id'])
+                    <div class="content-item fadein">
+                        <img src="./image/{{ $dat->image }}" alt="">
+                        <div class="item-menu">
+                            <ul class="list">
+                                <li>{{ $dat->title }}</li>
+                                <li>{{ $dat->cname }}</li>
+                                <li>{{ $dat->uname }}</li>
+                            </ul>
+                            <p>{{ $dat->text }}</p>
+                            <div class="edit-btn">
+                                <a href="/edit/{{ $dat->id }}">編集する</a>
+                                <a href="/delete/{{ $dat->id }}" class="delete">削除する</a>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
+        @endif
     </div>
 </div>
 @endsection
