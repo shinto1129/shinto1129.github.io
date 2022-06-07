@@ -12,7 +12,13 @@
                 <h2>正解数ランキング</h2>
                 <div class="category-list">
                     @foreach($arank as $a)
-                    <p>{{ $a->name }}</p>
+                    @if($arank['0']['name'] == $a->name)
+                        <p><span class="rank1 cp1">1位</span><span class="rank1"> {{ $a->name }}</span></p>
+                    @elseif($arank['1']['name'] == $a->name)
+                        <p><span class="rank2 cp2">2位</span><span class="rank2"> {{ $a->name }}</span></p>
+                    @elseif($arank['2']['name'] == $a->name)
+                        <p><span class="rank3 cp3">3位</span><span class="rank3"> {{ $a->name }}</span></p>
+                    @endif
                     @endforeach
                 </div>
             </div>
@@ -20,7 +26,13 @@
                 <h2>いいね数ランキング</h2>
                 <div class="category-list">
                     @foreach($urank as $u)
-                    <p>{{ $u->name }}</p>
+                    @if($urank['0']['name'] == $u->name)
+                        <p><span class="rank1 cp1">1位</span><span class="rank1"> {{ $u->name }}</span></p>
+                    @elseif($urank['1']['name'] == $u->name)
+                        <p><span class="rank2 cp2">2位</span><span class="rank2"> {{ $u->name }}</span></p>
+                    @elseif($urank['2']['name'] == $u->name)
+                        <p><span class="rank3 cp3">3位</span><span class="rank3"> {{ $u->name }}</span></p>
+                    @endif
                     @endforeach
                 </div>
             </div>
@@ -46,18 +58,24 @@
         </div>
         <div class="right-container fadein right">
             <div class="rank-container fadein">
-                <h2>人気Quiz</h2>
+                <h2>人気カテゴリ</h2>
                 <div class="category-list">
-                    @foreach($qrank as $q)
-                    <a href="/answer/{{ $q->id }}">{{ $q->title }}</a><br>
+                    @foreach($rank as $ra)
+                    @if($rank['0']['name'] == $ra->name)
+                        <p><span class="rank1 cp1">1位</span><span class="rank1"> {{ $ra->name }}</span></p>
+                    @elseif($rank['1']['name'] == $ra->name)
+                        <p><span class="rank2 cp2">2位</span><span class="rank2"> {{ $ra->name }}</span></p>
+                    @elseif($rank['2']['name'] == $ra->name)
+                        <p><span class="rank3 cp3">3位</span><span class="rank3"> {{ $ra->name }}</span></p>
+                    @endif
                     @endforeach
                 </div>
             </div>
             <div class="rank-container fadein">
-                <h2>人気カテゴリ</h2>
+                <h2>人気Quiz三選</h2>
                 <div class="category-list">
-                    @foreach($rank as $ra)
-                    <p>{{ $ra->name }}</p>
+                    @foreach($qrank as $q)
+                    <a href="/answer/{{ $q->id }}">{{ $q->title }}</a><br>
                     @endforeach
                 </div>
             </div>

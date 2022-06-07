@@ -8,6 +8,7 @@ use App\Models\Question;
 use App\Models\Answer;
 use App\Models\User;
 use App\Models\Good;
+use App\Models\Bad;
 
 use Illuminate\Support\Facades\DB;
 
@@ -107,6 +108,21 @@ class HomeController extends Controller
         ->select('answers.*', 'questions.title as title', 'questions.text as text', 'users.name as uname', 'users.id as u_id')
         ->get();
 
+        $adata = DB::table('answers')
+        ->join('questions', 'answers.question_id', '=', 'questions.id')
+        ->orderBy('questions.id', 'ASC')
+        ->groupBy('questions.id')
+        ->select('questions.id', DB::raw('count(*) as total'))
+        ->get();
+
+        $resultdata = DB::table('answers')
+        ->join('questions', 'answers.question_id', '=', 'questions.id')
+        ->orderBy('questions.id', 'ASC')
+        ->groupBy('questions.id', 'result')
+        ->where('result', '1')
+        ->select('questions.id', DB::raw('count(*) as total'))
+        ->get();
+
         $good = Good::where('user_id', $user['id'])->get();
         $good_count = User::withCount('good')->where('id', $user['id'])->first();
         //dd($good_count['good_count']);
@@ -116,8 +132,23 @@ class HomeController extends Controller
 
         
         //dd($good);
+        if($user['id'] == 1){
+            $bdata = DB::table('bads')
+            ->join('questions', 'bads.question_id', '=', 'questions.id')
+            ->join('users', 'questions.user_id', '=', 'users.id')
+            ->groupBy('questions.id')
+            ->select('questions.title as title', 'users.name as u_name', DB::raw('count(*) as total'))
+            ->get();
+            $ubdata = DB::table('bads')
+            ->join('questions', 'bads.question_id', '=', 'questions.id')
+            ->join('users', 'questions.user_id', '=', 'users.id')
+            ->groupBy('users.id')
+            ->select('users.name as u_name', DB::raw('count(*) as total'))
+            ->get();
+            return view('user', compact('data', 'user', 'answer', 'good', 'good_count', 'adata', 'resultdata', 'bdata', 'ubdata'));
+        }
 
-        return view('user', compact('data', 'user', 'answer', 'good', 'good_count'));
+        return view('user', compact('data', 'user', 'answer', 'good', 'good_count', 'adata', 'resultdata'));
     }
 
     public function answer($id)

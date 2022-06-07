@@ -12,10 +12,12 @@
             </div>
             <input type="text" name="question_id" value="{{ $data['id'] }}" style="display: none;">
             <div class="answer-colmun">
-                <input type="radio" name="answer" value="1">{{ $data['colmun1'] }}<br>
-                <input type="radio" name="answer" value="2">{{ $data['colmun2'] }}<br>
-                <input type="radio" name="answer" value="3">{{ $data['colmun3'] }}<br>
-                <input type="radio" name="answer" value="4">{{ $data['colmun4'] }}
+                <div class="answer-check">
+                    <input type="radio" name="answer" value="1">{{ $data['colmun1'] }}<br>
+                    <input type="radio" name="answer" value="2">{{ $data['colmun2'] }}<br>
+                    <input type="radio" name="answer" value="3">{{ $data['colmun3'] }}<br>
+                    <input type="radio" name="answer" value="4">{{ $data['colmun4'] }}
+                </div>
             </div>
             <input type="submit" value="解答する">
         </div>

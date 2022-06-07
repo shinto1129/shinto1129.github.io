@@ -40,6 +40,7 @@ Route::get('/delete/{id}', [QuizController::class, 'delete']);
 Route::get('/guest', [HomeController::class, 'guestIndex'])->name('guest');
 
 Route::post('/good', [QuizController::class, 'good'])->name('good');
+Route::post('/bad', [QuizController::class, 'bad'])->name('bad');
 
 Route::middleware([
     'auth:sanctum',

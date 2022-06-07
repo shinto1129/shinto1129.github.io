@@ -7,6 +7,7 @@ use App\Models\Question;
 use App\Models\Category;
 use App\Models\Answer;
 use App\Models\Good;
+use App\Models\Bad;
 
 
 class QuizController extends Controller
@@ -114,9 +115,43 @@ class QuizController extends Controller
             $good = Good::where('question_id', $question_id)->where('user_id', $user['id'])->delete();
         }
     }
+
+    public function bad(Request $request)
+    {
+        $user = \Auth::user(); //1.ログインユーザーの取得
+        $question_id = $request->question_id; //2.投稿idの取得
+        $quiz = Question::where('id', $question_id)->first();
+        $already_bad = Bad::where('user_id', $user['id'])->where('question_id', $question_id)->first();
+        //dd($already_bad);
+        if (!$already_bad) { //もしこのユーザーがこの投稿にまだいいねしてなかったら
+            $bad = Bad::insertGetId([
+                'user_id' => $user['id'],
+                'question_id' => $question_id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        } else { //もしこのユーザーがこの投稿に既にいいねしてたらdelete
+            $bad = Bad::where('question_id', $question_id)->where('user_id', $user['id'])->delete();
+        }
+    }
     
     public function delete($id)
     {
+        $user = \Auth::user();
+        if(empty($user)){
+            return view('auth.login');
+        }
+        $question = Question::where('id', $id)->count();
+        // dd($question);
+        if($question == 0){
+            return view('auth.login');
+        }
+        $question = Question::where('id', $id)->first();
+        if($question['user_id'] != $user['id']){
+            if($user['id'] != 1){
+                return view('auth.login');
+            }
+        }
         $quiz = Question::where('id', $id)->delete();
         $msg = '削除完了しました';
         return view('complete', compact('msg'));

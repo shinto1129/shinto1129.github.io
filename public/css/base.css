@@ -70,11 +70,22 @@ a:hover{
 .good-content-sub{
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+}
+.good-items{
+    display: flex;
 }
 .good-content-sub i{
     margin-top: 23px;
     margin-left: 20px;
+}
+.result-text{
+    color: red;
+}
+.result-area{
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .like-box{
@@ -417,9 +428,23 @@ form{
 .answer-title h2,.answer-title p{
     text-align: center;
 }
+
+.result h3{
+    font-size: 35px;
+    text-align: center;
+    font-weight: bold;
+}
 .answer-title p,.result p{
     margin-top: 30px;
     font-size: 17px;
+}
+.answer-colmun{
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+.answer-check{
+    text-align: left;
 }
 .answer-colmun input[type = "radio"]{
     margin: 10px 5px;
@@ -561,6 +586,30 @@ form{
 
 .like{
     color: pink;
+}
+
+.rank1{
+    font-size: 25px;
+}
+.rank2{
+    font-size: 19px;
+    opacity: 0.8;
+}
+.rank3{
+    font-size: 16px;
+    opacity: 0.7;
+}
+.cp1{
+    color: gold;
+}
+.cp2{
+    color: silver;
+}
+.cp3{
+    color: #c47222;
+}
+.item-pd i{
+    padding-top: 7px;
 }
 
 /* アニメーション */

@@ -1,5 +1,6 @@
 $(function(){
   let goodQuestionId;
+  let badQuestionId;
   $(".good").click(function () {
     goodQuestionId = $(this).data('good-id');
     $(this).toggleClass('like');
@@ -16,6 +17,33 @@ $(function(){
       dataType: "json",
       data: {
         'question_id': goodQuestionId,
+      },
+  
+    })
+      //通信が成功したとき
+      .done(function (data) {
+      })
+      //通信が失敗したとき
+      .fail((error) => {
+        console.log(error.statusText);
+      });
+  });
+  $(".bad").click(function () {
+    badQuestionId = $(this).data('bad-id');
+    $(this).toggleClass('like');
+    $.ajaxSetup({
+    headers: {
+      "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+    },
+  });
+    $.ajax({
+      //POST通信
+      type: "post",
+      //ここでデータの送信先URLを指定します。
+      url: "/bad",
+      dataType: "json",
+      data: {
+        'question_id': badQuestionId,
       },
   
     })

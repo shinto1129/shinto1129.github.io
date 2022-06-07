@@ -13,6 +13,30 @@
                 <i class="fa-solid fa-thumbs-up fa-2x"></i><span class="like-data">x{{ $good_count->good_count }}</span>
             </div>
         </div>
+        @if($user['id'] == 1)
+        <div class="user-content">
+            <h2 class="fadein top">クイズ報告一覧</h2>
+            @foreach($bdata as $bd)
+                <div class="content-item fadein">
+                    <div class="item-menu">
+                        <p>クイズタイトル: {{ $bd->title }}</p>
+                        <p>クイズ作成者: {{ $bd->u_name }}</p>
+                        <p>報告回数: <span class="like-data">{{$bd->total}}</span></p>
+                    </div>
+                </div>
+            @endforeach
+            <h2 class="fadein top">作成者報告回数</h2>
+                <div class="content-item fadein">
+                    <div class="item-menu">
+                        @foreach($ubdata as $ub)
+                        <p>ユーザ名:{{ $ub->u_name }}</p>
+                        <p>報告回数:<span class="like-data">{{ $ub->total }}</span></p>
+                        @endforeach
+                    </div>
+                </div>
+        </div>
+        @endif
+
         <div class="user-content">
             <h2 class="fadein top">解答一覧</h2>
             @foreach($answer as $ans)
@@ -74,6 +98,17 @@
                                 <li>{{ $dat->uname }}</li>
                             </ul>
                             <p>{{ $dat->text }}</p>
+                            <div class="result-area">
+                                @foreach($adata as $ad)
+                                    @if($ad->id == $dat->id)
+                                        @foreach($resultdata as $rdata)
+                                            @if($rdata->id == $dat->id)
+                                                <p>他ユーザ正答率 <span class="result-text">{{ $rdata->total }}</span> / <span class="result-text">{{ $ad->total }}</span></p>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endforeach
+                            </div>
                             <div class="edit-btn">
                                 <a href="/edit/{{ $dat->id }}">編集する</a>
                                 <a href="/delete/{{ $dat->id }}" class="delete">削除する</a>
