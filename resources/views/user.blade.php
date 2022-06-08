@@ -1,6 +1,7 @@
 @extends('layouts.setsub')
 
 @section('content')
+
 <div class="title-container">
         <h1 class="title">漫画QuizBattle</h1>
         <p class="fadein sub-title">Comic Quiz Battle</p>
